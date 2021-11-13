@@ -40,6 +40,6 @@ app.get('/all', taskController.getTasks);
 
 // Delete a task from the database
 // http://localhost:3000/student/"name"
-app.delete('/delete/:id', taskController.deleteTask);
+app.delete('/delete', taskController.deleteTask);
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));

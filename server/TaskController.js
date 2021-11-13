@@ -1,3 +1,4 @@
+const { isValidObjectId } = require('mongoose');
 const Tasks = require('./TaskModel');
 
 const toDoController = {
@@ -44,8 +45,9 @@ const toDoController = {
 
   deleteTask(req, res) {
     console.log('in deleteTask');
-    const task = req.params.task;
-    Tasks.findOneAndDelete({ subject: task })
+    const id = req.params.id;
+    console.log(id);
+    Tasks.findOneAndDelete(`{_id : ObjectId(${id}) }`)
       .then(data => {
         res.sendStatus(200);
       })

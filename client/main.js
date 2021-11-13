@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.forEach((el, i) => {
           // initializing card and styling it
           const card = document.createElement('div');
-          card.setAttribute('id', `card${el._id}`)
+          card.id = el._id;
           card.setAttribute('style', 'width:380px; height: 175px; padding: 5px; margin: 10px; border: 2px solid black');
 
           // setting values for each element
@@ -93,8 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
           card.appendChild(description);
           card.appendChild(deleteButton);
 
-          deleteButton.addEventListener('click', remove)
-          
+          deleteButton.addEventListener('click', () => deleteTask(card._id));
+          deleteButton.addEventListener('click', remove);
+
         })
       })
       .catch(err => console.log(err));
@@ -120,14 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
       })
   }
 
-  const deleteTask = () => {
+  const deleteTask = (id) => {
     fetch('/delete', {
       method: 'DELETE',
       headers: {
         'Content-Type':'application/json',
       },
       body: JSON.stringify({
-        id: ''
+        id: id
       })
     });
   }
